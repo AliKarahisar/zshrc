@@ -101,6 +101,11 @@ echo "Apache started...";
 sudo /usr/local/mysql/support-files/mysql.server start;
 }
 
+function addspace(){
+defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}';
+killall Dock;
+}
+
 function stopdevelopment(){
 sudo brew services stop httpd;
 echo "Apache stopped...";
@@ -110,10 +115,6 @@ sudo /usr/local/mysql/support-files/mysql.server stop;
 function restartdevelopment(){
 sudo brew services restart httpd;
 sudo /usr/local/mysql/support-files/mysql.server restart;
-}
-
-function opennotebook(){
-    jupyter notebook;
 }
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -133,6 +134,7 @@ alias blist="brew list"
 alias bclist="brew list --cask"
 alias pupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias p3update="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
+alias subl="'/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl'"
 alias corps="open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security"
 alias gizliac="defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder"
 alias gizlikapat="defaults write com.apple.finder AppleShowAllFiles -boolean false ; killall Finder"
@@ -147,3 +149,27 @@ export PATH="/usr/local/opt/openldap/bin:$PATH"
 export PATH="/usr/local/opt/openldap/sbin:$PATH"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/alikarahisar/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/alikarahisar/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/alikarahisar/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/alikarahisar/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/node@14/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/node@14/include"
+export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/alikarahisar/.lmstudio/bin"
